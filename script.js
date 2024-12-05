@@ -6,9 +6,6 @@ const Gameboard = (() => {
     return {board}
 })();
 
-console.log(Gameboard.board)
-
-
 
 const players = (name, marker) => {
     return {name, marker}
@@ -52,30 +49,43 @@ const Game = (() => {
         for(const combination of patterns) {
             const [a, b, c] = combination;
             if(tablero[a] && tablero[a] === tablero[b] && tablero[a] === tablero[c]){
-                console.log(`Ha ganado ${activePlayer.name}`)}
-        }
+                gameState = false;
+                console.log(`Ha ganado ${activePlayer.name}`) }
+        } 
+        console.log("running...") 
     };
     
     const getActivePlayer = () => activePlayer;
 
-    const placeMark = (index) => {
-        if(Gameboard.board[index] === null) {
-            Gameboard.board[index] = activePlayer.marker;
-            console.log(`Turno de ${activePlayer.name}`);
-            console.log(Gameboard.board);
-            checkWin();
-            createBoard();
-            switchPlayer();
-        } else console.log("posicion ocupada")
+    
+    const checkTie = () => {
+        console.log("EMPATE")
+        return (Gameboard.board.every(cell => cell !== null))
     }
-    return {switchPlayer, createBoard,checkWin, getActivePlayer, placeMark}
+
+    const placeMark = (index) => {
+        if(gameState === true){
+            if(Gameboard.board[index] === null) {
+                Gameboard.board[index] = activePlayer.marker;
+                console.log(`Turno de ${activePlayer.name}`);
+                console.log(Gameboard.board);
+                checkWin();
+                checkTie();
+                createBoard();
+                switchPlayer();
+            } else console.log("posicion ocupada")
+        }
+        else if(gameState === false) {
+            console.log("Partida terminada")
+        }
+        
+    }
+    return {switchPlayer, createBoard,checkWin, getActivePlayer, placeMark, checkTie}
 }
 )();
 
 
 Game.createBoard()
-
-
 
 
 
