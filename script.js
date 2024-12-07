@@ -1,6 +1,4 @@
 
-
-
 const Gameboard = (() => {
     const board = Array(9).fill(null);
     return {board}
@@ -11,17 +9,34 @@ const players = (name, marker) => {
     return {name, marker}
 }
 
+const getPlayersName = () => {
+    startButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        const player1Name = document.getElementById("player1");
+        const player2Name = document.getElementById("player2");
+        console.log(player1Name.value);
+        console.log(player2Name.value)
+    })
+}
 
 const Game = (() => {
+    const startButton = document.querySelector(".start-btn");
+
+
     const player1 = players("John", "X");
     const player2 = players("Dash", "O");
 
     let activePlayer = player1;
     let gameState = true;
 
+
+    
     const switchPlayer = () => {
         activePlayer = activePlayer === player1 ? player2 : player1
     }
+
+
+
     const createBoard = () => {
         const getBoard = Gameboard.board;
         const boardContainer = document.querySelector(".board-container");
@@ -29,11 +44,24 @@ const Game = (() => {
         getBoard.forEach((cell, index) => {
             const createCell = document.createElement("div");
             createCell.classList.add("cell");
-            createCell.textContent = cell;
             createCell.addEventListener("click", () => placeMark(index));
             boardContainer.appendChild(createCell);
+            if(cell === "X") {
+                const imgX = document.createElement("img");
+                imgX.src = "./X.svg";
+                imgX.classList.add("marker-img")
+                createCell.appendChild(imgX)
+            }else if (cell === "O"){
+                const imgO = document.createElement("img");
+                imgO.src = "./O.svg";
+                imgO.classList.add("marker-img")
+                createCell.appendChild(imgO)
+            }
         })
     }; 
+
+
+
     const checkWin = () => {
         const tablero = Gameboard.board;
         const patterns = [
@@ -55,13 +83,21 @@ const Game = (() => {
         console.log("running...") 
     };
     
+
+
     const getActivePlayer = () => activePlayer;
 
-    
+    addEventListener
+
     const checkTie = () => {
-        console.log("EMPATE")
-        return (Gameboard.board.every(cell => cell !== null))
+        if (Gameboard.board.every(cell => cell !== null)){
+            console.log("empate")
+        }
+        else
+        console.log("NO es empate")
     }
+
+
 
     const placeMark = (index) => {
         if(gameState === true){
@@ -86,21 +122,5 @@ const Game = (() => {
 
 
 Game.createBoard()
-
-
-
-
-
-
-
-
-
-
-
-const prueba = 
-[
-    [[0],[1],[2]],
-    [[3],[4],[5]],
-    [[6],[7],[8]]]
 
 
