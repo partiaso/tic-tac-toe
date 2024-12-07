@@ -19,6 +19,7 @@ const displayPlayer2 = document.getElementById("secondPlayer");
 const playersContainer = document.querySelector(".players-container");
 const showWinner = document.getElementById("winner");
 const modal = document.querySelector(".modal");
+const winText = document.querySelector(".win-text");
 
 const startGame = () => {
     startButton.addEventListener("click", (event) => {
@@ -53,12 +54,15 @@ const Game = () => {
     const player2 = players(player2Name, "O");
 
     let activePlayer = player1;
+    
     console.log(activePlayer)
     let gameState = true;
 
 
     
     const switchPlayer = () => {
+        player1.name === "" ? player1.name = "Player 1" :  player1.name;
+        player2.name === "" ? player2.name = "Player 2" :  player2.name;
         activePlayer = activePlayer === player1 ? player2 : player1
     }
 
@@ -136,6 +140,7 @@ const Game = () => {
         if (Gameboard.board.every(cell => cell !== null)){
             showWinner.innerText = "Draw";
             modal.style.display = "flex";
+            winText.style.display = "none";
             console.log("Showing modal")
         } else console.log("Not draw")
     }
