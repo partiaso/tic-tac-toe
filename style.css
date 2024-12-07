@@ -29,6 +29,8 @@ p, h1, h2, h3, h4, h5, h6 {
     --button-color: #2867ED;
     --highlight-color: #60A5FA;
     --text-color: #9ca3af;
+    --marker-x: #60A5FA;
+    --marker-o: #4ADE80;
 }
 
 .main-container {
@@ -59,6 +61,23 @@ p, h1, h2, h3, h4, h5, h6 {
     justify-content: space-between;
     width: 28rem;
 }
+.players-container {
+    width: 28rem;
+    height: 100px;
+    display: none;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.players-container div {
+    display: flex;
+    justify-content: center;
+    width: 200px;
+    font-size: 1.4rem;
+    padding: 1rem 1rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
 .score-container input {
     width: 200px;
     height: 48px;
@@ -84,10 +103,10 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 .board-container {
+    display: none;
     min-width: 28rem;
     min-height: 28rem;
     gap: 1rem;
-    display: grid;
     grid-template-rows: repeat(3, 1fr);
     grid-template-columns: repeat(3, 1fr);
 }
@@ -110,8 +129,8 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 .restart-btn {
+    display: none;
     width: 28rem;
-    height: 28rem;
     border-radius: 0.5rem;
     background-color: var(--button-color);
     color: #fff;
@@ -122,3 +141,37 @@ p, h1, h2, h3, h4, h5, h6 {
     cursor: pointer;
 }
 
+.modal {
+    position: fixed;
+    width: 500px;
+    height: 300px;
+    left: 50%;
+    top: 50%;
+    background-color: var(--card-bg-color);
+    transform: translate(-50%, -50%);
+    color: var(--text-color);
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    border: 2px solid var(--text-color);
+    border-radius: 0.5rem;
+}
+
+.modal button {
+    width: 28rem;
+    padding: 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: var(--button-color);
+    color: #fff;
+    font-weight: 600;
+}
+
+.winner-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 28rem;
+}
